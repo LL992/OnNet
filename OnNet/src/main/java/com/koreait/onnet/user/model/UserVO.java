@@ -1,4 +1,4 @@
-package com.koreait.onnet.model;
+package com.koreait.onnet.user.model;
 
 public class UserVO {
 	private int i_user;

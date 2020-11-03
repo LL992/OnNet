@@ -1,0 +1,23 @@
+package com.koreait.onnet.rest;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.koreait.onnet.rest.model.RestDMI;
+import com.koreait.onnet.rest.model.RestPARAM;
+
+@Service
+public class RestService {
+
+	@Autowired
+	private RestMapper mapper;
+
+	String selRestList(RestPARAM param) {
+		List<RestDMI> list = mapper.selRestList(param);
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
+}

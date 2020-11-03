@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.koreait.onnet.model.UserVO;
+import com.koreait.onnet.user.model.UserVO;
 
 
 

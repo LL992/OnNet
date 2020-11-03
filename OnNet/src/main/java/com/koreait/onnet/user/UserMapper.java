@@ -2,9 +2,9 @@ package com.koreait.onnet.user;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.koreait.onnet.model.UserVO;
 import com.koreait.onnet.user.model.UserDMI;
 import com.koreait.onnet.user.model.UserPARAM;
+import com.koreait.onnet.user.model.UserVO;
 
 @Mapper
 public interface UserMapper {
