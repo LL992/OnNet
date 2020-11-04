@@ -6,8 +6,8 @@
 		<typeAlias type="com.koreait.onnet.user.model.UserDMI" alias="UserDMI" />
 		<typeAlias type="com.koreait.onnet.user.model.UserPARAM" alias="UserPARAM" />
 		
-		<typeAlias type="com.koreait.matzip.rest.model.RestVO" alias="RestVO" />
-		<typeAlias type="com.koreait.matzip.rest.model.RestDMI" alias="RestDMI" />
-		<typeAlias type="com.koreait.matzip.rest.model.RestPARAM" alias="RestPARAM" />
+		<typeAlias type="com.koreait.onnet.rest.model.RestVO" alias="RestVO" />
+		<typeAlias type="com.koreait.onnet.rest.model.RestDMI" alias="RestDMI" />
+		<typeAlias type="com.koreait.onnet.rest.model.RestPARAM" alias="RestPARAM" />
 	</typeAliases>
 </configuration>
