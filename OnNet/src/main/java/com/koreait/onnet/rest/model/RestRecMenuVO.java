@@ -1,14 +1,14 @@
-package com.koreait.onnet.model;
+package com.koreait.onnet.rest.model;
 
-public class RestaurantRecommendMenuVO {
+public class RestRecMenuVO {
 	private int i_rest;
 	private int seq;
 	private String menu_nm;
 	private int menu_price;
 	private String menu_pic;
-
+	
 	private int i_user;
-
+	
 	public int getI_user() {
 		return i_user;
 	}
@@ -45,6 +45,6 @@ public class RestaurantRecommendMenuVO {
 	public void setMenu_pic(String menu_pic) {
 		this.menu_pic = menu_pic;
 	}
-
-
+	
+	
 }

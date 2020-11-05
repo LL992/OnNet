@@ -32,8 +32,8 @@
 				<h2>- 추천 메뉴 -</h2>
 				<div>
 					<div><button type="button" onclick="addRecMenu()">추천 메뉴 추가</button></div>
-					<form id="recFrm" action="/restaurant/addRecMenusProc" enctype="multipart/form-data" method="post">
-						<input type="hidden" name="i_rest" value="${data.i_rest}">
+					<form id="recFrm" action="/rest/recMenus" enctype="multipart/form-data" method="post">
+						<input type="hidden1" name="i_rest" value="${data.i_rest}">
 						<div id="recItem"></div>
 						<div><input type="submit" value="등록"></div>
 					</form>
@@ -55,8 +55,8 @@
 						<h1 class="restaurant_name">${data.nm}</h1>
 					</div>
 					<div class="status branch_none">
-						<span class="cnt hit">${data.cntHits}</span>					
-						<span class="cnt favorite">${data.cntFavorite}</span>
+						<span class="cnt hit">${data.hits}</span>					
+						<span class="cnt favorite">${data.cnt_favorite}</span>
 					</div>
 				</div>
 				<div>
@@ -70,6 +70,10 @@
 							<tr>
 								<th>카테고리</th>
 								<td>${data.cd_category_nm}</td>
+							</tr>
+							<tr>
+								<th>작성자</th>
+								<td>${data.user_nm}</td>
 							</tr>
 							<tr>
 								<th>메뉴</th>
@@ -133,7 +137,7 @@
 		inputPrice.setAttribute('name', 'menu_price')
 		var inputPic = document.createElement('input')
 		inputPic.setAttribute('type', 'file')
-		inputPic.setAttribute('name', 'menu_pic_' + idx++)
+		inputPic.setAttribute('name', 'menu_pic')
 		
 		div.append('메뉴: ')
 		div.append(inputNm)
@@ -147,7 +151,7 @@
 	addRecMenu()
 	function isDel() {
 		if(confirm('삭제 하시겠습니까?')) {
-			location.href = '/restaurant/restDel?i_rest=${data.i_rest}'
+			location.href = '/rest/del?i_rest=${data.i_rest}'
 		}
 	}
 </script>

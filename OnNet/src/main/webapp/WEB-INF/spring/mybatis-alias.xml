@@ -9,5 +9,8 @@
 		<typeAlias type="com.koreait.onnet.rest.model.RestVO" alias="RestVO" />
 		<typeAlias type="com.koreait.onnet.rest.model.RestDMI" alias="RestDMI" />
 		<typeAlias type="com.koreait.onnet.rest.model.RestPARAM" alias="RestPARAM" />
+		<typeAlias type="com.koreait.onnet.rest.model.RestRecMenuVO" alias="RestRecMenuVO" />
+		
+		<typeAlias type="com.koreait.onnet.model.CodeVO" alias="CodeVO" />
 	</typeAliases>
 </configuration>

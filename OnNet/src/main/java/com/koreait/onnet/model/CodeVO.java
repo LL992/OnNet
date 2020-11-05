@@ -1,6 +1,6 @@
 package com.koreait.onnet.model;
 
-public class CodeDomain {
+public class CodeVO {
 	private int i_m;
 	private int cd;
 	private String val;
