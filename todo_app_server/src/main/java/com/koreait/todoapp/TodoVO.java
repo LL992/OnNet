@@ -1,5 +1,8 @@
 package com.koreait.todoapp;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("TodoVO")
 public class TodoVO {
 
 	private int i_todo;
