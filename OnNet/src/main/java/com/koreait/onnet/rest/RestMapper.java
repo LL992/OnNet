@@ -12,8 +12,10 @@ import com.koreait.onnet.rest.model.RestRecMenuVO;
 public interface RestMapper {
 	int insRest(RestPARAM param);
 	int insRestRecMenu(RestRecMenuVO param);
+	int insRestMenu(RestRecMenuVO param);
 	List<RestDMI>selRestList(RestPARAM param);
 	RestDMI selRest(RestPARAM param);
+	List<RestRecMenuVO> selRestRecMenus(RestPARAM param);
 	int delrestRecMenu(RestPARAM param);
 	int delRestMenu(RestPARAM param);
 	int delRest(RestPARAM param);

@@ -7,9 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,6 +20,7 @@ import com.koreait.onnet.Const;
 import com.koreait.onnet.SecurityUtils;
 import com.koreait.onnet.ViewRef;
 import com.koreait.onnet.rest.model.RestDMI;
+import com.koreait.onnet.rest.model.RestFile;
 import com.koreait.onnet.rest.model.RestPARAM;
 
 @Controller
@@ -64,6 +68,10 @@ public class RestController {
 	@RequestMapping("/detail")
 	public String detail(RestPARAM param, Model model) {
 		RestDMI data = service.selRest(param);
+		
+		model.addAttribute("recMenuList", service.selRestRecMenu(param));
+		
+		model.addAttribute("css", new String[] {"restDetail"});
 		model.addAttribute("data", data);
 		model.addAttribute(Const.TITLE, data.getNm()); //가게명
 		model.addAttribute(Const.VIEW, "rest/restDetail");
@@ -89,6 +97,26 @@ public class RestController {
 		int i_rest = service.insRecMenus(mReq);
 		
 		ra.addAttribute("i_rest", i_rest);
+		return "redirect:/rest/detail";
+	}
+	
+	@RequestMapping("/ajaxDelRecMenu")
+	@ResponseBody public int ajaxDelRecMenu(RestPARAM param, HttpSession hs) {
+		String path = "/resources/img/rest" + param.getI_rest() + "/rec_menu";
+		String realPath = hs.getServletContext().getRealPath(path);
+		param.setI_user(SecurityUtils.getLoginUserPk(hs)); // 로그인 유저의 pk담기
+		return service.delRecMenu(param, realPath);
+	}
+	
+	@RequestMapping("/menus")
+	public String menus(@ModelAttribute RestFile param 
+			, HttpSession hs
+			, RedirectAttributes ra) {
+		
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		int result = service.insRecMenus(param, i_user);
+		ra.addAttribute("i_rest", param.getI_rest());
+		
 		return "redirect:/rest/detail";
 	}
 }

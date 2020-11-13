@@ -16,6 +16,7 @@ import com.koreait.onnet.FileUtils;
 import com.koreait.onnet.model.CodeVO;
 import com.koreait.onnet.model.CommonMapper;
 import com.koreait.onnet.rest.model.RestDMI;
+import com.koreait.onnet.rest.model.RestFile;
 import com.koreait.onnet.rest.model.RestPARAM;
 import com.koreait.onnet.rest.model.RestRecMenuVO;
 
@@ -30,6 +31,10 @@ public class RestService {
 	
 	public List<RestDMI> selRestList(RestPARAM param) {
 		return mapper.selRestList(param);
+	}
+	
+	public List<RestRecMenuVO> selRestRecMenu(RestPARAM param) {
+		return mapper.selRestRecMenus(param);
 	}
 
 	public List<CodeVO> selCategoryList() {
@@ -102,5 +107,30 @@ public class RestService {
 			mapper.insRestRecMenu(vo);
 		}
 		return i_rest;
+	}
+	
+	public int delRecMenu(RestPARAM param, String realPath) {
+		List<RestRecMenuVO> list = mapper.selRestRecMenus(param);
+		if(list.size() == 1) {
+			RestRecMenuVO item = list.get(0);
+			
+			if(item.getMenu_pic() != null && !item.getMenu_pic().equals("")) {
+				File file = new File(realPath + item.getMenu_pic());
+				if(file.exists()) {
+					if(file.delete()) {
+						return mapper.delrestRecMenu(param);
+					} else {
+						return 0;
+					}
+				}
+			}
+		}
+		
+		return mapper.delrestRecMenu(param);
+	}
+
+	public int insRecMenus(RestFile param, int i_user) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

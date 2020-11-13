@@ -5,11 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div>
 	<div class="recMenuContainer">
-		<c:forEach items="${recommendMenuList}" var="item">
+		<c:forEach items="${recMenuList}" var="item">
 			<div class="recMenuItem" id="recMenuItem_${item.seq}">
 				<div class="pic">
 					<c:if test="${item.menu_pic != null and item.menu_pic != ''}">
-						<img src="/res/img/restaurant/${data.i_rest}/${item.menu_pic}">
+						<img src="/res/img/rest/${data.i_rest}/rec_menu/${item.menu_pic}">
 					</c:if>
 				</div>
 				<div class="info">
@@ -33,7 +33,7 @@
 				<div>
 					<div><button type="button" onclick="addRecMenu()">추천 메뉴 추가</button></div>
 					<form id="recFrm" action="/rest/recMenus" enctype="multipart/form-data" method="post">
-						<input type="hidden1" name="i_rest" value="${data.i_rest}">
+						<input type="hidden" name="i_rest" value="${data.i_rest}">
 						<div id="recItem"></div>
 						<div><input type="submit" value="등록"></div>
 					</form>
@@ -41,7 +41,7 @@
 
 				<h2>- 메뉴 -</h2>
 				<div>
-					<form id="menuFrm" action="/restaurant/addMenusProc" enctype="multipart/form-data" method="post">
+					<form id="menuFrm" action="/rest/menus" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="i_rest" value="${data.i_rest}">
 						<input type="file" name="menu_pic" multiple>
 						<div><input type="submit" value="등록"></div>
@@ -111,7 +111,7 @@
 		}	
 		console.log('seq : ' + seq)
 		
-		axios.get('/restaurant/ajaxDelRecMenu', {
+		axios.get('/rest/ajaxDelRecMenu', {
 			params: {
 				i_rest: ${data.i_rest},
 				seq: seq
@@ -128,6 +128,7 @@
 	var idx = 0;
 	function addRecMenu() {
 		var div = document.createElement('div')
+		div.setAttribute('id', 'recMenu_' + idx++)
 		
 		var inputNm = document.createElement('input')
 		inputNm.setAttribute('type', 'text')
@@ -135,9 +136,18 @@
 		var inputPrice = document.createElement('input')
 		inputPrice.setAttribute('type', 'number')
 		inputPrice.setAttribute('name', 'menu_price')
+		inputPrice.value = '0'
 		var inputPic = document.createElement('input')
 		inputPic.setAttribute('type', 'file')
 		inputPic.setAttribute('name', 'menu_pic')
+		
+		var delBtn = document.createElement('input')
+		delBtn.setAttribute('type', 'button')
+		delBtn.setAttribute('value', 'X')
+		elBtn.addEventListener('click', function() {
+			div.remove()
+		})
+		
 		
 		div.append('메뉴: ')
 		div.append(inputNm)
@@ -145,6 +155,7 @@
 		div.append(inputPrice)
 		div.append(' 사진: ')
 		div.append(inputPic)
+		div.append(delBtn)
 		
 		recItem.append(div)
 	}
